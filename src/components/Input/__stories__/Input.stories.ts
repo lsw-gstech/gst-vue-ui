@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import GstInput from '../Input.vue'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import GstInput from '../Input.vue';
 
 const meta = {
   title: 'Components/Input',
@@ -27,10 +27,10 @@ const meta = {
     },
     errorMessage: { control: 'text' },
   },
-} satisfies Meta<typeof GstInput>
+} satisfies Meta<typeof GstInput>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -38,7 +38,7 @@ export const Default: Story = {
     modelValue: '삭제 버튼 테스트',
     clearable: false,
   },
-}
+};
 
 export const WithIcons: Story = {
   args: {
@@ -46,7 +46,7 @@ export const WithIcons: Story = {
     prefixIcon: 'pi-search',
     clearable: true,
   },
-}
+};
 
 export const Password: Story = {
   args: {
@@ -54,7 +54,7 @@ export const Password: Story = {
     placeholder: '비밀번호를 입력하세요',
     prefixIcon: 'pi-lock',
   },
-}
+};
 
 export const WithValidation: Story = {
   args: {
@@ -62,4 +62,4 @@ export const WithValidation: Story = {
     errorMessage: '올바른 이메일 주소를 입력해주세요',
     value: 'invalid-email',
   },
-}
+};
