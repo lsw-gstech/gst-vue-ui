@@ -2,7 +2,8 @@
   import { computed } from 'vue';
   import Dropdown from 'primevue/dropdown';
   import MultiSelect from 'primevue/multiselect';
-  import type { DropdownChangeEvent, MultiSelectChangeEvent } from 'primevue/dropdown';
+  import type { DropdownChangeEvent } from 'primevue/dropdown';
+  import type { MultiSelectChangeEvent } from 'primevue/multiselect';
   import type { ISelectProps, ISelectOption } from './types';
 
   const props = withDefaults(defineProps<ISelectProps>(), {
@@ -14,7 +15,7 @@
 
   const emit = defineEmits<{
     'update:modelValue': [value: any | any[]];
-    change: [event: Event];
+    change: [event: DropdownChangeEvent | MultiSelectChangeEvent];
   }>();
 
   const selectClasses = computed(() => ({

@@ -27,6 +27,8 @@
   const handleChange = (event: Event) => {
     emit('change', event);
   };
+
+  const checkboxId = `gst-checkbox-${Math.random().toString(36).substring(2, 9)}`;
 </script>
 
 <template>
@@ -39,6 +41,7 @@
         :indeterminate="indeterminate"
         :disabled="disabled"
         @change="handleChange"
+        :inputId="checkboxId"
       >
         <template v-if="customIcon" #icon="{ checked }">
           <i
@@ -52,7 +55,7 @@
           />
         </template>
       </Checkbox>
-      <label v-if="label" class="gst-checkbox-label">{{ label }}</label>
+      <label v-if="label" :for="checkboxId" class="gst-checkbox-label">{{ label }}</label>
     </div>
 
     <small v-if="errorMessage" class="gst-checkbox__error">

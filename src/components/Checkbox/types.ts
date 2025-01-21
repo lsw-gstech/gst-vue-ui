@@ -1,6 +1,6 @@
 import type { CheckboxProps } from 'primevue/checkbox';
 
-export interface ICheckboxProps {
+export interface ICheckboxProps extends CheckboxProps {
   modelValue: boolean;
   label?: string;
   indeterminate?: boolean;
