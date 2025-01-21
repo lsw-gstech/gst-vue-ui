@@ -1,0 +1,63 @@
+# 문서 언어 규칙
+docs.language=ko
+comments.language=ko
+
+# Vue 컴포넌트 네이밍 규칙
+components.vue.prefix=Gst
+components.vue.naming=PascalCase
+
+# 파일 구조 규칙
+structure.components=src/components/{name}/{name}.vue
+structure.types=src/components/{name}/types.ts
+structure.index=src/components/{name}/index.ts
+structure.style=src/components/{name}/style.scss
+
+# 컴포넌트 내부 구조 순서
+component.order.script=setup,props,emits,interface,const,function,watch,computed
+component.order.template=template
+component.order.style=style
+
+# Props 네이밍 규칙
+props.naming=camelCase
+props.required=true
+
+# 이벤트 네이밍 규칙
+events.prefix=on
+events.naming=PascalCase
+
+# 타입스크립트 규칙
+typescript.interface.prefix=I
+typescript.type.prefix=T
+typescript.enum.suffix=Enum
+
+# CSS/SCSS 규칙
+css.prefix=gst-
+css.naming=kebab-case
+css.scope=scoped
+
+# 문서화 규칙
+docs.required=true
+docs.props=true
+docs.events=true
+docs.slots=true
+docs.example=true
+docs.language.comments=한글로 작성
+docs.language.storybook=한글로 작성
+docs.language.readme=한글로 작성
+docs.language.jsdoc=한글로 작성
+
+# Git 커밋 메시지 규칙
+git.commit.type=feat,fix,docs,style,refactor,test,chore
+git.commit.scope=optional
+git.commit.format={type}({scope}): {message}
+git.commit.language=ko
+
+# 테스트 파일 규칙
+test.location=src/components/{name}/__tests__
+test.naming={name}.spec.ts
+test.language=ko
+
+# Storybook 규칙
+story.location=src/components/{name}/__stories__
+story.naming={name}.stories.ts
+story.language=ko

@@ -1,0 +1,6 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": ["primevue", "primeflex", "primeicons", "pinia", "vite", "vitest", "autodocs"],
+  "ignorePaths": ["node_modules/**"]
+}
