@@ -46,7 +46,7 @@
       <div v-for="option in options" :key="option.value" class="gst-checkbox-item">
         <Checkbox
           :modelValue="value"
-          @update:modelValue="(checked) => handleGroupCheckbox(checked, option.value)"
+          @update:modelValue="(checked: boolean) => handleGroupCheckbox(checked, option.value)"
           :value="option.value"
           :disabled="option.disabled || disabled"
           @change="handleChange"
