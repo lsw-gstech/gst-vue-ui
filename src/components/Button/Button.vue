@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
-  import Button from 'primevue/button'
-  import type { IButtonProps } from './types'
+  import { computed } from 'vue';
+  import Button from 'primevue/button';
+  import type { IButtonProps } from './types';
 
   const props = withDefaults(defineProps<IButtonProps>(), {
     disabled: false,
@@ -9,7 +9,7 @@
     variant: 'filled',
     severity: 'primary',
     iconOnly: false,
-  })
+  });
 
   const buttonClasses = computed(() => ({
     'gst-button': true,
@@ -17,7 +17,7 @@
     [`gst-button--${props.variant}`]: true,
     [`gst-button--${props.severity}`]: true,
     'gst-button--icon-only': props.iconOnly,
-  }))
+  }));
 </script>
 
 <template>

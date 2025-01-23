@@ -1,0 +1,25 @@
+.gst-select {
+  &.p-dropdown {
+    // 크기 변형
+    &.p-dropdown-sm {
+      .p-dropdown-label {
+        font-size: 0.875rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+
+    &.p-dropdown-lg {
+      .p-dropdown-label {
+        font-size: 1.25rem;
+        padding: 0.8rem 1.6rem;
+      }
+    }
+
+    // 그룹 스타일
+    .p-dropdown-item-group {
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      background-color: var(--surface-100);
+    }
+  }
+}

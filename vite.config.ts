@@ -28,10 +28,12 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: 'src/index.ts',
-      formats: ['es', 'cjs'],
+      entry: {
+        'gst-vue-ui': resolve(__dirname, 'src/index.ts'),
+      },
+      formats: ['es', 'umd'],
       name: 'GstVueUI',
-      fileName: (format) => `gst-vue-ui.${format}.js`,
+      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'mjs' : 'js'}`,
     },
     rollupOptions: {
       external: ['vue', 'primevue'],
@@ -41,7 +43,12 @@ export default defineConfig({
           primevue: 'PrimeVue',
         },
         exports: 'named',
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') return 'gst-vue-ui.css';
+          return assetInfo.name;
+        },
       },
     },
+    cssCodeSplit: false,
   },
 });

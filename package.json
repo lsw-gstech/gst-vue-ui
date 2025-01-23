@@ -6,19 +6,19 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/gst-vue-ui.umd.js",
-  "module": "./dist/gst-vue-ui.es.js",
+  "main": "./dist/gst-vue-ui.js",
+  "module": "./dist/gst-vue-ui.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/gst-vue-ui.es.js",
-      "require": "./dist/gst-vue-ui.umd.js"
+      "import": "./dist/gst-vue-ui.mjs",
+      "require": "./dist/gst-vue-ui.js"
     },
-    "./style.css": "./dist/style.css"
+    "./style": "./dist/gst-vue-ui.css"
   },
   "scripts": {
-    "build": "vite build",
+    "build": "rm -rf dist && vite build",
     "test:unit": "vitest",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",

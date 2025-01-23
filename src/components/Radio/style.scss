@@ -1,0 +1,24 @@
+.gst-radio {
+  &.p-radiobutton {
+    // 크기 변형
+    &.p-radiobutton-sm {
+      width: 1rem;
+      height: 1rem;
+
+      .p-radiobutton-box {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+
+    &.p-radiobutton-lg {
+      width: 1.5rem;
+      height: 1.5rem;
+
+      .p-radiobutton-box {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+}

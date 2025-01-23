@@ -1,0 +1,28 @@
+.gst-button {
+  &.p-button {
+    // 크기 변형
+    &.p-button-sm {
+      font-size: 0.875rem;
+      padding: 0.4rem 0.8rem;
+    }
+
+    &.p-button-lg {
+      font-size: 1.25rem;
+      padding: 0.8rem 1.6rem;
+    }
+
+    // 아이콘 전용 버튼
+    &.p-button-icon-only {
+      width: auto;
+      padding: 0.5rem;
+
+      &.p-button-sm {
+        padding: 0.4rem;
+      }
+
+      &.p-button-lg {
+        padding: 0.8rem;
+      }
+    }
+  }
+}

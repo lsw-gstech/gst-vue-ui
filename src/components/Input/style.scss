@@ -1,0 +1,23 @@
+.gst-input {
+  &.p-inputtext {
+    // 크기 변형
+    &.p-inputtext-sm {
+      font-size: 0.875rem;
+      padding: 0.4rem 0.8rem;
+    }
+
+    &.p-inputtext-lg {
+      font-size: 1.25rem;
+      padding: 0.8rem 1.6rem;
+    }
+
+    // 유효성 검사 상태
+    &.p-invalid {
+      border-color: var(--red-500);
+    }
+
+    &.p-valid {
+      border-color: var(--green-500);
+    }
+  }
+}
