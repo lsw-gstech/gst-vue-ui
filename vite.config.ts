@@ -1,10 +1,26 @@
-import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
+import dts from 'vite-plugin-dts';
+import ts from 'typescript';
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    dts({
+      include: ['src/**/*.ts', 'src/**/*.vue'],
+      outDir: 'dist',
+      rollupTypes: true,
+      compilerOptions: {
+        moduleResolution: ts.ModuleResolutionKind.NodeNext,
+      },
+      tsconfigPath: './tsconfig.app.json',
+      copyDtsFiles: true,
+      insertTypesEntry: true,
+      cleanVueFileName: true,
+    }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -12,9 +28,10 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'GstVueUi',
-      fileName: 'gst-vue-ui',
+      entry: 'src/index.ts',
+      formats: ['es', 'cjs'],
+      name: 'GstVueUI',
+      fileName: (format) => `gst-vue-ui.${format}.js`,
     },
     rollupOptions: {
       external: ['vue', 'primevue'],
@@ -23,11 +40,8 @@ export default defineConfig({
           vue: 'Vue',
           primevue: 'PrimeVue',
         },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'gst-vue-ui.css'
-          return assetInfo.name || 'unknown'
-        },
+        exports: 'named',
       },
     },
   },
-})
+});
