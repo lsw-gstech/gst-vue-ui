@@ -63,3 +63,18 @@ test.language=ko
 story.location=src/components/{name}/__stories__
 story.naming={name}.stories.ts
 story.language=ko
+
+# 프로젝트 구조
+'''
+src/
+  ├── components/
+  │   └── index.ts
+  ├── styles/
+  │   ├── themes/
+  │   │   ├── default.scss
+  │   │   └── dark.scss
+  │   ├── variables/
+  │   │   └── _index.scss
+  │   └── main.scss
+  └── index.ts
+'''
