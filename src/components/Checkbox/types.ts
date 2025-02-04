@@ -1,6 +1,6 @@
-import type { CheckboxProps } from 'primevue/checkbox';
+import type { CheckboxProps as PrimeCheckboxProps } from 'primevue/checkbox';
 
-export interface ICheckboxProps extends CheckboxProps {
+export interface ICheckboxProps extends PrimeCheckboxProps {
   modelValue: boolean;
   label?: string;
   indeterminate?: boolean;
@@ -19,6 +19,15 @@ export interface ICheckboxOption {
 export interface ICheckboxGroupProps {
   modelValue: any[];
   options: ICheckboxOption[];
+  inline?: boolean;
+  disabled?: boolean;
+  validationState?: 'success' | 'warning' | 'error';
+  errorMessage?: string;
+}
+
+export interface CheckboxProps extends Omit<PrimeCheckboxProps, 'modelValue'> {
+  modelValue: boolean;
+  label?: string;
   disabled?: boolean;
   validationState?: 'success' | 'warning' | 'error';
   errorMessage?: string;

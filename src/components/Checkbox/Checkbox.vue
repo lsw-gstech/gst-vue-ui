@@ -13,9 +13,9 @@
     change: [event: Event];
   }>();
 
-  const value = computed({
+  const localValue = computed({
     get: () => props.modelValue,
-    set: (newValue) => emit('update:modelValue', newValue),
+    set: (value) => emit('update:modelValue', value),
   });
 
   const checkboxClasses = computed(() => ({
@@ -32,95 +32,33 @@
 </script>
 
 <template>
-  <div class="gst-checkbox-wrapper" :class="checkboxClasses">
-    <div class="gst-checkbox-item">
-      <Checkbox
-        :binary="true"
-        :modelValue="value"
-        @update:modelValue="value = $event"
-        :indeterminate="indeterminate"
-        :disabled="disabled"
-        @change="handleChange"
-        :inputId="checkboxId"
-      >
-        <template v-if="customIcon" #icon="{ checked }">
-          <i
-            :class="[
-              'pi',
-              {
-                [customIcon]: checked,
-                'pi-minus': props.indeterminate,
-              },
-            ]"
-          />
-        </template>
-      </Checkbox>
-      <label v-if="label" :for="checkboxId" class="gst-checkbox-label">{{ label }}</label>
-    </div>
-
-    <small v-if="errorMessage" class="gst-checkbox__error">
-      {{ errorMessage }}
-    </small>
-  </div>
+  <Checkbox v-model="localValue" v-bind="$attrs" :class="['gst-checkbox', $attrs.class]" />
 </template>
 
 <style lang="scss" scoped>
-  .gst-checkbox-wrapper {
-    .gst-checkbox-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .gst-checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .gst-checkbox-label {
-      cursor: pointer;
-      user-select: none;
-      color: var(--text-color);
-    }
-
-    // 유효성 검사 상태
-    &.gst-checkbox--error :deep(.p-checkbox) {
+  .gst-checkbox {
+    &.p-checkbox {
+      // 기본 스타일
       .p-checkbox-box {
-        border-color: var(--red-500);
+        &:not(.p-disabled):hover {
+          border-color: var(--primary-color);
+        }
+
+        &.p-focus {
+          border-color: var(--primary-color);
+          box-shadow: var(--focus-ring);
+        }
 
         &.p-highlight {
-          background: var(--red-500);
+          background-color: var(--primary-color);
+          border-color: var(--primary-color);
+
+          &:not(.p-disabled):hover {
+            background-color: var(--primary-hover-color);
+            border-color: var(--primary-hover-color);
+          }
         }
       }
-    }
-
-    &.gst-checkbox--warning :deep(.p-checkbox) {
-      .p-checkbox-box {
-        border-color: var(--yellow-500);
-
-        &.p-highlight {
-          background: var(--yellow-500);
-        }
-      }
-    }
-
-    &.gst-checkbox--success :deep(.p-checkbox) {
-      .p-checkbox-box {
-        border-color: var(--green-500);
-
-        &.p-highlight {
-          background: var(--green-500);
-        }
-      }
-    }
-
-    // 에러 메시지
-    .gst-checkbox__error {
-      display: block;
-      margin-top: 0.25rem;
-      color: var(--red-500);
-      font-size: 0.75rem;
     }
   }
 </style>

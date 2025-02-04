@@ -15,25 +15,30 @@ const mainBuild = {
     fileName: (format) => `gst-vue-ui.${format === 'es' ? 'mjs' : 'js'}`,
   },
   rollupOptions: {
-    external: ['vue', 'primevue'],
+    external: ['vue', 'primevue', /^primevue\/(?!resources)/],
     output: {
       globals: {
         vue: 'Vue',
         primevue: 'PrimeVue',
       },
       exports: 'named' as const,
+      assetFileNames: (assetInfo) => {
+        if (assetInfo.name === 'style.css') return 'gst-vue-ui.css';
+        return assetInfo.name;
+      },
     },
   },
   cssCodeSplit: false,
-  css: {
-    extract: false,
-  },
 };
 
 // 스타일 전용 빌드 설정
 const styleBuild = {
+  lib: {
+    entry: resolve(__dirname, 'src/styles/variables.scss'),
+    formats: ['es'] as LibraryFormats[],
+    fileName: () => 'variables',
+  },
   rollupOptions: {
-    input: resolve(__dirname, 'src/styles/variables.scss'),
     output: {
       assetFileNames: 'variables.css',
     },
@@ -42,8 +47,8 @@ const styleBuild = {
   emptyOutDir: false,
 };
 
-export default defineConfig(({ mode }) => {
-  const buildConfig = mode === 'style' ? styleBuild : mainBuild;
+export default defineConfig(({ command, mode }) => {
+  const config = mode === 'style' ? styleBuild : mainBuild;
 
   return {
     plugins: [
@@ -74,6 +79,10 @@ export default defineConfig(({ mode }) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-    build: buildConfig,
+    build: {
+      ...config,
+      minify: true,
+      sourcemap: true,
+    },
   };
 });

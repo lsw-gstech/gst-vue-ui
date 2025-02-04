@@ -15,11 +15,11 @@
       "import": "./dist/gst-vue-ui.mjs",
       "require": "./dist/gst-vue-ui.js"
     },
-    "./variables": "./dist/variables.css"
+    "./style": "./dist/gst-vue-ui.css",
+    "./variables": "./dist/variables.scss"
   },
   "scripts": {
-    "build": "vite build",
-    "build:style": "vite build --mode style",
+    "build": "rm -rf dist && vite build && vite build --mode style",
     "test:unit": "vitest",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
@@ -28,12 +28,13 @@
     "build-storybook": "storybook build"
   },
   "peerDependencies": {
-    "primevue": "^3.0.0",
     "vue": "^3.4.0"
   },
   "dependencies": {
+    "primevue": "^4.2.5",
     "primeflex": "^3.3.1",
-    "primeicons": "^7.0.0"
+    "primeicons": "^7.0.0",
+    "@primevue/themes": "^4.0.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.17",

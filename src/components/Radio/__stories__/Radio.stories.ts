@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
-import { ref } from 'vue';
 import GstRadio from '../Radio.vue';
 
 const meta = {
@@ -8,63 +7,38 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     modelValue: { control: 'text' },
-    inline: { control: 'boolean' },
+    value: { control: 'text' },
+    label: { control: 'text' },
+    name: { control: 'text' },
+    disabled: { control: 'boolean' },
   },
-  render: (args) => ({
-    components: { GstRadio },
-    setup() {
-      const value = ref(args.modelValue);
-      return { args, value };
-    },
-    template: '<GstRadio v-bind="{ ...args, modelValue: value }" v-model="value" />',
-  }),
 } satisfies Meta<typeof GstRadio>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof GstRadio>;
 
 export const Default: Story = {
   args: {
     modelValue: '1',
-    options: [
-      { value: '1', label: '옵션 1' },
-      { value: '2', label: '옵션 2' },
-      { value: '3', label: '옵션 3' },
-    ],
+    value: '1',
+    label: '옵션 1',
   },
 };
 
-export const Inline: Story = {
+export const Disabled: Story = {
   args: {
     modelValue: '1',
-    inline: true,
-    options: [
-      { value: '1', label: '옵션 1' },
-      { value: '2', label: '옵션 2' },
-      { value: '3', label: '옵션 3' },
-    ],
+    value: '1',
+    label: '비활성화된 옵션',
+    disabled: true,
   },
 };
 
-export const WithDisabled: Story = {
+export const WithName: Story = {
   args: {
     modelValue: '1',
-    options: [
-      { value: '1', label: '옵션 1' },
-      { value: '2', label: '옵션 2' },
-      { value: '3', label: '비활성화 옵션', disabled: true },
-    ],
-  },
-};
-
-export const WithValidation: Story = {
-  args: {
-    modelValue: '',
-    options: [
-      { value: '1', label: '옵션 1' },
-      { value: '2', label: '옵션 2' },
-    ],
-    validationState: 'error',
-    errorMessage: '필수 항목입니다.',
+    value: '1',
+    label: '그룹 옵션',
+    name: 'group1',
   },
 };

@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
-import GstButton from '../Button.vue'
+import type { Meta, StoryObj } from '@storybook/vue3';
+import type { ButtonProps } from '../types';
+import GstButton from '../Button.vue';
 
 // 메타데이터 정의
 const meta = {
@@ -8,21 +9,44 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     label: { control: 'text' },
+    severity: {
+      control: 'select',
+      options: ['primary', 'secondary', 'success', 'info', 'warning', 'danger'],
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'normal', 'large'],
+    },
+    variant: {
+      control: 'select',
+      options: ['contained', 'outlined', 'text'],
+      defaultValue: 'contained',
+    },
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    raised: { control: 'boolean' },
+    rounded: { control: 'boolean' },
+    text: { control: 'boolean' },
+    plain: { control: 'boolean' },
+    link: { control: 'boolean' },
+    icon: { control: 'text' },
+    iconPos: {
+      control: 'select',
+      options: ['left', 'right', 'top', 'bottom'],
+    },
     onClick: { action: 'clicked' },
   },
-} satisfies Meta<typeof GstButton>
+} satisfies Meta<ButtonProps>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<ButtonProps>;
 
 // 기본 버튼 스토리
 export const Default: Story = {
   args: {
     label: '기본 버튼',
   },
-}
+};
 
 // 로딩 상태 스토리
 export const Loading: Story = {
@@ -30,7 +54,7 @@ export const Loading: Story = {
     label: '로딩 버튼',
     loading: true,
   },
-}
+};
 
 // 비활성화 상태 스토리
 export const Disabled: Story = {
@@ -38,4 +62,25 @@ export const Disabled: Story = {
     label: '비활성화 버튼',
     disabled: true,
   },
-}
+};
+
+export const WithIcon: Story = {
+  args: {
+    label: '아이콘 버튼',
+    icon: 'pi pi-check',
+  },
+};
+
+export const Outlined: Story = {
+  args: {
+    label: '아웃라인 버튼',
+    variant: 'outlined',
+  },
+};
+
+export const Text: Story = {
+  args: {
+    label: '텍스트 버튼',
+    variant: 'text',
+  },
+};

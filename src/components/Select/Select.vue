@@ -1,88 +1,42 @@
 <script setup lang="ts">
-  import { computed } from 'vue';
   import Dropdown from 'primevue/dropdown';
-  import MultiSelect from 'primevue/multiselect';
-  import type { DropdownChangeEvent } from 'primevue/dropdown';
-  import type { MultiSelectChangeEvent } from 'primevue/multiselect';
-  import type { ISelectProps, ISelectOption } from './types';
-
-  const props = withDefaults(defineProps<ISelectProps>(), {
-    multiple: false,
-    searchable: false,
-    disabled: false,
-    options: () => [],
-  });
-
-  const emit = defineEmits<{
-    'update:modelValue': [value: any | any[]];
-    change: [event: DropdownChangeEvent | MultiSelectChangeEvent];
-  }>();
-
-  const selectClasses = computed(() => ({
-    'gst-select': true,
-    'gst-select--disabled': props.disabled,
-    [`gst-select--${props.validationState}`]: props.validationState,
-  }));
-
-  const groupedOptions = computed(() => {
-    if (!props.groups) return props.options;
-
-    return props.groups.map((group) => ({
-      label: group.label,
-      items: props.options.filter((option) => option.groupId === group.id),
-    }));
-  });
-
-  const handleChange = (event: DropdownChangeEvent | MultiSelectChangeEvent) => {
-    emit('change', event);
-  };
 </script>
 
 <template>
-  <div class="gst-select-wrapper" :class="selectClasses">
-    <MultiSelect
-      v-if="multiple"
-      :modelValue="modelValue"
-      @update:modelValue="(value) => emit('update:modelValue', value)"
-      v-bind="$attrs"
-      :options="props.groups ? groupedOptions : props.options"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      :filter="searchable"
-      optionLabel="label"
-      :optionGroupLabel="props.groups ? 'label' : undefined"
-      :optionGroupChildren="props.groups ? 'items' : undefined"
-      @change="handleChange"
-    >
-      <template v-if="$slots.option" #option="slotProps">
-        <slot name="option" v-bind="slotProps" />
-      </template>
-    </MultiSelect>
-
-    <Dropdown
-      v-else
-      :modelValue="modelValue"
-      @update:modelValue="(value) => emit('update:modelValue', value)"
-      v-bind="$attrs"
-      :options="props.options"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      :filter="searchable"
-      optionLabel="label"
-      @change="handleChange"
-    >
-      <template v-if="$slots.option" #option="slotProps">
-        <slot name="option" v-bind="slotProps" />
-      </template>
-    </Dropdown>
-
-    <small v-if="errorMessage" class="gst-select__error">
-      {{ errorMessage }}
-    </small>
-  </div>
+  <Dropdown v-bind="$attrs" :class="['gst-select', $attrs.class]" />
 </template>
 
 <style lang="scss" scoped>
+  .gst-select {
+    &.p-dropdown {
+      // 기본 스타일
+      &:not(.p-disabled):hover {
+        border-color: var(--primary-color);
+      }
+
+      &:not(.p-disabled).p-focus {
+        border-color: var(--primary-color);
+        box-shadow: var(--focus-ring);
+      }
+
+      // 패널 스타일
+      .p-dropdown-panel {
+        .p-dropdown-items {
+          .p-dropdown-item {
+            &.p-highlight {
+              background-color: var(--primary-hover-bg);
+              color: var(--primary-color);
+            }
+
+            &:not(.p-highlight):not(.p-disabled):hover {
+              background-color: var(--primary-hover-bg);
+            }
+          }
+        }
+      }
+    }
+  }
+
   .gst-select-wrapper {
     position: relative;
     width: 100%;

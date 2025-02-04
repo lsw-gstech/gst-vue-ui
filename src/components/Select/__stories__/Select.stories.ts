@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
+import type { SelectProps } from '../types';
 import GstSelect from '../Select.vue';
 
 const meta = {
@@ -12,10 +13,45 @@ const meta = {
       { value: 3, label: '옵션 3' },
     ],
   },
-} satisfies Meta<typeof GstSelect>;
+  argTypes: {
+    modelValue: {
+      control: 'select',
+      options: [1, 2, 3],
+    },
+    options: {
+      control: 'object',
+    },
+    placeholder: {
+      control: 'text',
+    },
+    filter: {
+      control: 'boolean',
+    },
+    optionLabel: {
+      control: 'text',
+      defaultValue: 'label',
+    },
+    optionValue: {
+      control: 'text',
+      defaultValue: 'value',
+    },
+    optionDisabled: {
+      control: 'text',
+      defaultValue: 'disabled',
+    },
+    optionGroupLabel: {
+      control: 'text',
+      defaultValue: 'label',
+    },
+    optionGroupChildren: {
+      control: 'text',
+      defaultValue: 'items',
+    },
+  },
+} satisfies Meta<SelectProps>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<SelectProps>;
 
 export const Default: Story = {
   args: {
@@ -23,36 +59,35 @@ export const Default: Story = {
   },
 };
 
-export const Multiple: Story = {
+export const WithFilter: Story = {
   args: {
-    placeholder: '여러 항목을 선택하세요',
-    multiple: true,
+    placeholder: '검색하세요',
+    filter: true,
+    options: Array.from({ length: 20 }, (_, i) => ({
+      value: i + 1,
+      label: `옵션 ${i + 1}`,
+    })),
   },
 };
 
 export const WithGroups: Story = {
   args: {
     placeholder: '선택하세요',
-    groups: [
-      { id: 'g1', label: '그룹 1' },
-      { id: 'g2', label: '그룹 2' },
-    ],
     options: [
-      { value: 1, label: '옵션 1', groupId: 'g1' },
-      { value: 2, label: '옵션 2', groupId: 'g1' },
-      { value: 3, label: '옵션 3', groupId: 'g2' },
-      { value: 4, label: '옵션 4', groupId: 'g2' },
+      {
+        label: '그룹 1',
+        items: [
+          { value: 1, label: '옵션 1' },
+          { value: 2, label: '옵션 2' },
+        ],
+      },
+      {
+        label: '그룹 2',
+        items: [
+          { value: 3, label: '옵션 3' },
+          { value: 4, label: '옵션 4' },
+        ],
+      },
     ],
-  },
-};
-
-export const WithSearch: Story = {
-  args: {
-    placeholder: '검색하세요',
-    searchable: true,
-    options: Array.from({ length: 20 }, (_, i) => ({
-      value: i + 1,
-      label: `옵션 ${i + 1}`,
-    })),
   },
 };
