@@ -1,8 +1,20 @@
 import type { DropdownProps } from 'primevue/dropdown';
 
-export interface SelectProps extends /* @vue-ignore */ Omit<DropdownProps, 'size'> {
+export interface SelectOption {
+  label: string;
+  value: any;
+  disabled?: boolean;
+}
+
+export interface SelectGroup {
+  label: string;
+  items: SelectOption[];
+  disabled?: boolean;
+}
+
+export interface SelectProps extends /* @vue-ignore */ Omit<DropdownProps, 'size' | 'modelValue'> {
   modelValue: any;
-  options?: any[];
+  options?: (SelectOption | SelectGroup)[];
   optionLabel?: string;
   optionValue?: string;
   optionDisabled?: string;
@@ -10,7 +22,7 @@ export interface SelectProps extends /* @vue-ignore */ Omit<DropdownProps, 'size
   optionGroupChildren?: string;
   placeholder?: string;
   filter?: boolean;
-  filterMatchMode?: string;
+  filterMatchMode?: 'contains' | 'startsWith' | 'endsWith';
   filterPlaceholder?: string;
   filterLocale?: string;
   filterFields?: string[];

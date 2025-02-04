@@ -15,11 +15,23 @@ const mainBuild = {
     fileName: (format) => `gst-vue-ui.${format === 'es' ? 'mjs' : 'js'}`,
   },
   rollupOptions: {
-    external: ['vue', 'primevue', /^primevue\/(?!resources)/],
+    external: ['vue', /^primevue\/.*/],
     output: {
       globals: {
         vue: 'Vue',
-        primevue: 'PrimeVue',
+        'primevue/button': 'primevue.button',
+        'primevue/inputtext': 'primevue.inputtext',
+        'primevue/dropdown': 'primevue.dropdown',
+        'primevue/checkbox': 'primevue.checkbox',
+        'primevue/radiobutton': 'primevue.radiobutton',
+        'primevue/config': 'primevue.config',
+        'primevue/toastservice': 'primevue.toastservice',
+        'primevue/dialogservice': 'primevue.dialogservice',
+        'primevue/confirmationservice': 'primevue.confirmationservice',
+        'primevue/usetoast': 'primevue.usetoast',
+        'primevue/usedialog': 'primevue.usedialog',
+        'primevue/useconfirm': 'primevue.useconfirm',
+        'primevue/tooltip': 'primevue.tooltip',
       },
       exports: 'named' as const,
       assetFileNames: (assetInfo) => {
@@ -64,6 +76,10 @@ export default defineConfig(({ command, mode }) => {
         copyDtsFiles: true,
         insertTypesEntry: true,
         cleanVueFileName: true,
+        beforeWriteFile: (filePath, content) => ({
+          filePath: filePath.replace('/dist/src/', '/dist/'),
+          content,
+        }),
       }),
       viteStaticCopy({
         targets: [
