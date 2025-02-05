@@ -3,6 +3,7 @@ import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 import DialogService from 'primevue/dialogservice';
 import ConfirmationService from 'primevue/confirmationservice';
+import Tooltip from 'primevue/tooltip';
 import Aura from '@primevue/themes/aura';
 
 // PrimeVue 유틸리티
@@ -38,7 +39,6 @@ import ConfirmDialog from 'primevue/confirmdialog';
 import ConfirmPopup from 'primevue/confirmpopup';
 import Popover from 'primevue/popover';
 import Drawer from 'primevue/drawer';
-import Tooltip from 'primevue/tooltip';
 import Menu from 'primevue/menu';
 import Menubar from 'primevue/menubar';
 import ContextMenu from 'primevue/contextmenu';
@@ -59,12 +59,7 @@ import Skeleton from 'primevue/skeleton';
 import ScrollTop from 'primevue/scrolltop';
 import Divider from 'primevue/divider';
 
-// GST 컴포넌트들
-import GstButton from './components/Button/Button.vue';
-import GstInput from './components/Input/Input.vue';
-// ... 다른 GST 컴포넌트들
-
-// PrimeVue 컴포넌트 맵
+// PrimeVue 컴포넌트 매핑
 const primeComponents = {
   AutoComplete,
   DatePicker,
@@ -112,14 +107,7 @@ const primeComponents = {
   Skeleton,
   ScrollTop,
   Divider,
-};
-
-// GST 컴포넌트 맵
-const gstComponents = {
-  GstButton,
-  GstInput,
-  // ... 다른 컴포넌트들
-};
+} as const;
 
 export default {
   install: (app: App, options = {}) => {
@@ -129,29 +117,24 @@ export default {
       theme: {
         preset: Aura,
         options: {
-          prefix: 'p',
+          prefix: 'gst',
           darkModeSelector: 'system',
         },
       },
       ...options,
     });
 
-    // PrimeVue 서비스 등록
+    // PrimeVue 서비스
     app.use(ToastService as any);
     app.use(DialogService as any);
     app.use(ConfirmationService as any);
 
-    // Tooltip 디렉티브 등록
+    // 디렉티브
     app.directive('tooltip', Tooltip as any);
 
-    // PrimeVue 컴포넌트 등록
+    // PrimeVue 컴포넌트 등록 (Gst prefix 추가)
     Object.entries(primeComponents).forEach(([name, component]) => {
-      app.component(name, component);
-    });
-
-    // GST 컴포넌트 등록
-    Object.entries(gstComponents).forEach(([name, component]) => {
-      app.component(name, component);
+      app.component(`Gst${name}`, component);
     });
   },
 };
