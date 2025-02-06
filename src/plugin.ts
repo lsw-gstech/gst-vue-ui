@@ -4,7 +4,11 @@ import ToastService from 'primevue/toastservice';
 import DialogService from 'primevue/dialogservice';
 import ConfirmationService from 'primevue/confirmationservice';
 import Tooltip from 'primevue/tooltip';
-import Aura from '@primevue/themes/aura';
+// GST UI 테마와 스타일
+import { GstPreset } from './styles/themes/gst-preset.ts';
+
+// GST UI 스타일
+import './styles/variables.scss';
 
 // PrimeVue 유틸리티
 export { useToast } from 'primevue/usetoast';
@@ -110,18 +114,20 @@ const primeComponents = {
 } as const;
 
 export default {
-  install: (app: App, options = {}) => {
+  install: (app: App) => {
     // PrimeVue 설정
     app.use(PrimeVue as any, {
       ripple: true,
+      unstyled: false,
       theme: {
-        preset: Aura,
+        name: 'gst',
+        preset: GstPreset,
         options: {
           prefix: 'gst',
           darkModeSelector: 'system',
+          cssLayer: 'primevue',
         },
       },
-      ...options,
     });
 
     // PrimeVue 서비스

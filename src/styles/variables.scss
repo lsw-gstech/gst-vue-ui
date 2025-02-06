@@ -58,4 +58,117 @@ $danger-hover-bg: rgba(239, 68, 68, 0.1) !default;
 
   // 포커스 링
   --focus-ring: 0 0 0 2px var(--primary-hover-bg);
+
+  // GST UI 전용 변수
+  --gst-spacing-xs: 0.25rem;
+  --gst-spacing-sm: 0.5rem;
+  --gst-spacing-md: 1rem;
+  --gst-spacing-lg: 1.5rem;
+  --gst-spacing-xl: 2rem;
+
+  // 그리드 시스템
+  --gst-grid-gap: var(--gst-spacing-md);
+  --gst-container-padding: var(--gst-spacing-md);
+
+  // z-index 시스템
+  --gst-z-dropdown: 1000;
+  --gst-z-sticky: 1020;
+  --gst-z-fixed: 1030;
+  --gst-z-modal-backdrop: 1040;
+  --gst-z-modal: 1050;
+  --gst-z-popover: 1060;
+  --gst-z-tooltip: 1070;
+
+  // 애니메이션
+  --gst-transition-duration: 0.2s;
+  --gst-transition-timing: ease-in-out;
+
+  // 그림자
+  --gst-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --gst-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --gst-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --gst-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+  // 포커스 링
+  --gst-focus-ring: 0 0 0 2px var(--primary-100);
+  --gst-focus-ring-offset: 2px;
+  --gst-focus-ring-color: var(--primary-200);
+
+  // 상태 표시
+  --gst-state-success: var(--green-500);
+  --gst-state-warning: var(--yellow-500);
+  --gst-state-error: var(--red-500);
+  --gst-state-info: var(--blue-500);
+
+  // 테두리
+  --gst-border-radius-sm: 0.25rem;
+  --gst-border-radius: 0.375rem;
+  --gst-border-radius-lg: 0.5rem;
+  --gst-border-radius-xl: 0.75rem;
+  --gst-border-radius-full: 9999px;
+}
+
+// Mixins
+@mixin gst-focus-visible {
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--gst-focus-ring);
+    outline-offset: var(--gst-focus-ring-offset);
+  }
+}
+
+@mixin gst-hover {
+  &:hover:not(.p-disabled) {
+    background: var(--surface-hover);
+    color: var(--primary-color);
+    transition: all var(--gst-transition-duration) var(--gst-transition-timing);
+  }
+}
+
+@mixin gst-active {
+  &:active:not(.p-disabled) {
+    background: var(--surface-ground);
+    transform: translateY(1px);
+  }
+}
+
+@mixin gst-disabled {
+  &.p-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin gst-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin gst-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--surface-ground);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--surface-border);
+    border-radius: var(--gst-border-radius);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--surface-400);
+  }
+}
+
+// PrimeVue Aura 테마 변수 오버라이드 (필요한 경우)
+:root {
+  // 여기에 PrimeVue 변수 오버라이드
+  // --primary-color: #custom-color;
+  // --font-family: 'Your Font', sans-serif;
+  // 등등...
 }
