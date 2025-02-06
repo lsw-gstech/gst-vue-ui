@@ -4,9 +4,7 @@ import ToastService from 'primevue/toastservice';
 import DialogService from 'primevue/dialogservice';
 import ConfirmationService from 'primevue/confirmationservice';
 import Tooltip from 'primevue/tooltip';
-// GST UI 테마와 스타일
-import { GstPreset } from './styles/themes/gst-preset.ts';
-
+import { GstPreset } from './styles/themes/gst-preset';
 // GST UI 스타일
 import './styles/variables.scss';
 
@@ -113,20 +111,14 @@ const primeComponents = {
   Divider,
 } as const;
 
-export default {
+export const plugin = {
   install: (app: App) => {
-    // PrimeVue 설정
+    // PrimeVue 설정 - GstPreset만 사용
     app.use(PrimeVue as any, {
       ripple: true,
       unstyled: false,
       theme: {
-        name: 'gst',
         preset: GstPreset,
-        options: {
-          prefix: 'gst',
-          darkModeSelector: 'system',
-          cssLayer: 'primevue',
-        },
       },
     });
 
@@ -144,3 +136,5 @@ export default {
     });
   },
 };
+
+export default plugin;

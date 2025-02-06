@@ -1,93 +1,72 @@
+import { definePreset } from '@primevue/themes';
+import Aura from '@primevue/themes/aura';
+
+// props 타입 정의
+interface ComponentProps {
+  [key: string]: any;
+}
+
 // PrimeVue 테마 프리셋 확장
-export const GstPreset = {
-  name: 'gst',
-  baseTheme: 'aura',
-  dark: false,
-  colors: {
-    // 메인 컬러
-    'primary-color': '#ff6600',
-    'primary-color-hover': '#dd6600',
-    'primary-hover-bg': 'rgba(37, 99, 235, 0.1)',
-
-    // 보조 컬러
-    'secondary-color': '#64748b',
-    'secondary-color-hover': '#475569',
-    'secondary-hover-bg': 'rgba(100, 116, 139, 0.1)',
-
-    // 상태 컬러
-    'success-color': '#22c55e',
-    'warning-color': '#f59e0b',
-    'danger-color': '#ef4444',
-    'info-color': '#0ea5e9',
-
-    // 표면 컬러
-    'surface-ground': '#f8f9fa',
-    'surface-section': '#ffffff',
-    'surface-card': '#ffffff',
-    'surface-overlay': '#ffffff',
-    'surface-border': '#dfe7ef',
-    'surface-hover': '#f6f9fc',
-
-    // 텍스트 컬러
-    'text-color': '#495057',
-    'text-color-secondary': '#6c757d',
-    'text-color-disabled': '#9ea4ab',
+export const GstPreset = definePreset(Aura, {
+  // 프리미티브 토큰 정의
+  primitive: {
+    // 오렌지 계열의 프리미티브 컬러 정의
+    orange: {
+      50: '#fff7ed',
+      100: '#ffedd5',
+      200: '#fed7aa',
+      300: '#fdba74',
+      400: '#fb923c',
+      500: '#ff6600', // GST 메인 컬러
+      600: '#dd6600',
+      700: '#c2410c',
+      800: '#9a3412',
+      900: '#7c2d12',
+      950: '#431407',
+    },
   },
-  variables: {
-    // 간격
-    'spacing-xs': '0.25rem',
-    'spacing-sm': '0.5rem',
-    'spacing-md': '1rem',
-    'spacing-lg': '1.5rem',
-    'spacing-xl': '2rem',
 
-    // 테두리
-    'border-radius': '0.375rem',
-    'border-radius-sm': '0.25rem',
-    'border-radius-lg': '0.5rem',
-    'border-radius-xl': '0.75rem',
-    'border-radius-full': '9999px',
-
-    // 그림자
-    'shadow-sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-    shadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
-    'shadow-md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
-    'shadow-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
-
-    // 포커스
-    'focus-ring': '0 0 0 2px var(--primary-100)',
-    'focus-ring-offset': '2px',
-
-    // 애니메이션
-    'transition-duration': '0.2s',
-    'transition-timing': 'ease-in-out',
-
-    // 폰트
-    'font-family': '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    'font-size': '1rem',
-    'font-weight-normal': '400',
-    'font-weight-medium': '500',
-    'font-weight-bold': '600',
-  },
-  components: {
-    // 버튼 컴포넌트 스타일
-    button: {
-      root: {
-        class: ['gst-button'],
-        style: {
-          padding: 'var(--spacing-md)',
-          borderRadius: 'var(--border-radius)',
-          transition: 'all var(--transition-duration) var(--transition-timing)',
-        },
+  // 시맨틱 토큰 정의
+  semantic: {
+    // 프리미티브 토큰을 참조하여 시맨틱 컬러 정의
+    primary: {
+      50: '{orange.50}',
+      100: '{orange.100}',
+      200: '{orange.200}',
+      300: '{orange.300}',
+      400: '{orange.400}',
+      500: '{orange.500}',
+      600: '{orange.600}',
+      700: '{orange.700}',
+      800: '{orange.800}',
+      900: '{orange.900}',
+      950: '{orange.950}',
+    },
+    // 다크모드 대응
+    colorScheme: {
+      light: {
+        'primary-color': '{orange.500}',
+        'primary-hover-color': '{orange.600}',
+        'surface-ground': '#f8f9fa',
+        'surface-card': '#ffffff',
+      },
+      dark: {
+        'primary-color': '{orange.400}',
+        'primary-hover-color': '{orange.300}',
+        'surface-ground': '#1f2937',
+        'surface-card': '#1e293b',
       },
     },
-    // 입력 필드 컴포넌트 스타일
+  },
+
+  // 컴포넌트 토큰 정의
+  components: {
+    // 입력 필드 컴포넌트 토큰
     inputtext: {
       root: {
-        class: ['gst-input'],
         style: {
-          borderRadius: 'var(--border-radius)',
-          transition: 'all var(--transition-duration) var(--transition-timing)',
+          borderRadius: '0.375rem',
+          padding: '0.5rem 0.75rem',
         },
       },
     },
@@ -104,4 +83,4 @@ export const GstPreset = {
       },
     },
   },
-};
+});
